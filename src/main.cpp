@@ -37,6 +37,7 @@ int all_c::loop_game(void)
         }
         window.clear(sf::Color::Black);
         menu->display_menu(window);
+        menu->display_button(window);
         window.display();
     }
     return 0;

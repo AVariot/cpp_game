@@ -6,7 +6,7 @@
 
 
 CC = g++
-CFLAGS = -Wall -g -std=c++20
+CFLAGS = -Wall -g -std=c++20 -O3
 LFLAGS = -L/path/to/sfml/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 SRC_DIR = ./src
