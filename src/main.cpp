@@ -11,6 +11,7 @@ void all_c::init_all_c_class(void)
     mode = sf::VideoMode::getDesktopMode();
     window.create(mode, "Geometry doush");
     window.setKeyRepeatEnabled(false);
+    scene = MENU;
 }
 
 // Create class

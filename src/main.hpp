@@ -16,8 +16,15 @@
     #include <iterator>
     #include <list>
 
+    enum SCENE {
+        MENU,
+        GAME,
+        SETTINGS
+    };
+
     class all_c {
         public:
+            enum SCENE scene;
             // Fonction all_c
             int loop_game(void);
             void init_all_c_class(void);
