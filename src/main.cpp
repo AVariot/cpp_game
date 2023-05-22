@@ -12,6 +12,7 @@ void all_c::init_all_c_class(void)
     window.create(mode, "Geometry doush");
     window.setKeyRepeatEnabled(false);
     scene = MENU;
+    menu = create_menu();
 }
 
 // Create class
@@ -35,6 +36,7 @@ int all_c::loop_game(void)
             }
         }
         window.clear(sf::Color::Black);
+        menu->display_menu(window);
         window.display();
     }
     return 0;

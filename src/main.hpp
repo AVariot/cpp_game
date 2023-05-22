@@ -15,6 +15,7 @@
     #include <string>
     #include <iterator>
     #include <list>
+    #include "menu/menu.hpp"
 
     enum SCENE {
         MENU,
@@ -31,6 +32,7 @@
             //variables
             sf::RenderWindow window;
             sf::Event event;
+            menu_c *menu;
 
         private:
             sf::VideoMode mode;
