@@ -11,7 +11,7 @@ void mc_c::init_mc_c_class(void)
         exit(84);
     }
     pos = {200, 200};
-    speed = 0.5;
+    speed = 0.3;
     gravity = -1;
 
     is_jumping = false;
@@ -46,13 +46,14 @@ void mc_c::apply_gravity(sf::Clock clock)
 
 void mc_c::jump_effect(void)
 {
+    pos.x += 0.7;
     if (is_jump_up) {
         if (gravity > _MAX_HEIGTH_JUMP_)
             pos.y--, gravity--;
         else
             is_jump_up = false;
     } else {
-        if (gravity <= -1)
+        if (gravity < -1)
             pos.y++, gravity++;
         else
             is_jumping = false;
@@ -62,10 +63,11 @@ void mc_c::jump_effect(void)
 
 void mc_c::display_mc(sf::RenderWindow &window, sf::Clock clock)
 {
-    // apply_gravity(clock);
     move_mc(clock);
     if (is_jumping)
         jump_effect();
+    else
+        apply_gravity(clock);
     window.draw(sprite);
 }
 
