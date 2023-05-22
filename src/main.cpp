@@ -12,6 +12,8 @@ void all_c::init_all_c_class(void)
     window.create(mode, "Geometry doush");
     window.setKeyRepeatEnabled(false);
     scene = MENU;
+    // Init other class
+    mc = create_mc_c_class();
 }
 
 // Create class
@@ -35,7 +37,9 @@ int all_c::loop_game(void)
             }
         }
         window.clear(sf::Color::Black);
+        mc->display_mc(window, clock);
         window.display();
+        clock.restart();
     }
     return 0;
 }

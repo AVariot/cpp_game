@@ -16,6 +16,8 @@
     #include <iterator>
     #include <list>
 
+    #include "the_runner/mc.hpp"
+
     enum SCENE {
         MENU,
         GAME,
@@ -28,9 +30,12 @@
             // Fonction all_c
             int loop_game(void);
             void init_all_c_class(void);
-            //variables
+            // Variables
             sf::RenderWindow window;
             sf::Event event;
+            sf::Clock clock;
+            // Other class
+            mc_c *mc;
 
         private:
             sf::VideoMode mode;
