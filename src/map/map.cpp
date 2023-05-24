@@ -26,9 +26,9 @@ map_c *create_map_c_class(void)
 
 void map_c::display_map(sf::RenderWindow &window)
 {
-//     pos.x -= 2;
-//     if (pos.x <= -3840)
-//         pos.x = 0;
-//     sprite.setPosition(pos);
+    pos.x -= 2;
+    if (pos.x <= -3840)
+        pos.x = 0;
+    sprite.setPosition(pos);
     window.draw(sprite);
 }
