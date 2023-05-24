@@ -15,6 +15,7 @@
             // Variables
             sf::Sprite sprite;
             sf::Vector2f pos;
+            sf::FloatRect floor;
 
         private:
             sf::Texture texture;

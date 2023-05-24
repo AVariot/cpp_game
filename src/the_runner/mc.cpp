@@ -10,7 +10,7 @@ void mc_c::init_mc_c_class(void)
         printf("Err: impossible to load the base_mc.png from assets/mc\n");
         exit(84);
     }
-    pos = {200, 200};
+    pos = {200, 690};
     speed = 0.5;
     gravity = -1;
 
@@ -29,33 +29,36 @@ mc_c *create_mc_c_class(void)
     return new_mc_c;
 }
 
-void mc_c::apply_gravity(sf::Clock clock)
+void mc_c::apply_gravity(sf::Clock clock, sf::FloatRect floor)
 {
-    pos.y -= (gravity * (clock.getElapsedTime().asMilliseconds() / 100));
+    if (!sprite.getGlobalBounds().intersects(floor))
+        pos.y -= (gravity * (clock.getElapsedTime().asMilliseconds() / 100));
 }
 
-void mc_c::jump_effect(sf::Clock clock)
+void mc_c::jump_effect(sf::Clock clock, sf::FloatRect floor)
 {
     if (is_jump_up) {
         if (gravity > _MAX_HEIGTH_JUMP_)
-            (pos.y -= 3 * (clock.getElapsedTime().asMicroseconds() / 100)), gravity--;
+            (pos.y -= 1 * (clock.getElapsedTime().asMicroseconds() / 100)), gravity--;
         else
             is_jump_up = false;
     } else {
-        if (gravity < -1)
-            (pos.y += 3 * (clock.getElapsedTime().asMicroseconds() / 100)), gravity++;
-        else
+        if (!sprite.getGlobalBounds().intersects(floor))
+            (pos.y += 1 * (clock.getElapsedTime().asMicroseconds() / 100));
+        else {
             is_jumping = false;
+            gravity = -1;
+        }
     }
     sprite.setPosition(pos);
 }
 
-void mc_c::display_mc(sf::RenderWindow &window, sf::Clock clock)
+void mc_c::display_mc(sf::RenderWindow &window, sf::Clock clock, sf::FloatRect floor)
 {
     if (is_jumping)
-        jump_effect(clock);
+        jump_effect(clock, floor);
     else
-        apply_gravity(clock);
+        apply_gravity(clock, floor);
     window.draw(sprite);
 }
 

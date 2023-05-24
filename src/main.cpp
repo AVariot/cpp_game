@@ -41,7 +41,7 @@ int all_c::loop_game(void)
         }
         window.clear(sf::Color::Black);
         map->display_map(window);
-        mc->display_mc(window, clock);
+        mc->display_mc(window, clock, map->floor);
         window.display();
         clock.restart();
     }

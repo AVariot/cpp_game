@@ -11,9 +11,10 @@ void map_c::init_map_c_class(void)
         exit(84);
     }
     pos = {0, 0};
+    float y = 810;
+    floor = {0, y, 1920, 1080 - y};
 
     sprite.setTexture(texture);
-//     sprite.setScale({5, 5});
     sprite.setPosition(pos);
 }
 

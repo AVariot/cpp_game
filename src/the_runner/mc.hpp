@@ -12,11 +12,11 @@
     class mc_c {
         public:
             //fonction
-            void display_mc(sf::RenderWindow &window, sf::Clock clock);
+            void display_mc(sf::RenderWindow &window, sf::Clock clock, sf::FloatRect floor);
             void init_mc_c_class(void);
-            void apply_gravity(sf::Clock clock);
+            void apply_gravity(sf::Clock clock, sf::FloatRect floor);
             void event_mc_c(sf::Event event);
-            void jump_effect(sf::Clock clock);
+            void jump_effect(sf::Clock clock, sf::FloatRect floor);
             //variables
             int gravity;
             bool is_jumping;
