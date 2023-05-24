@@ -11,7 +11,7 @@ void mc_c::init_mc_c_class(void)
         exit(84);
     }
     pos = {200, 200};
-    speed = 0.3;
+    speed = 0.5;
     gravity = -1;
 
     is_jumping = false;
@@ -29,32 +29,26 @@ mc_c *create_mc_c_class(void)
     return new_mc_c;
 }
 
-void mc_c::move_mc(sf::Clock clock)
-{
-    pos.x += (speed);
-    // pos.x += (speed * (clock.getElapsedTime().asMilliseconds()));
-    // pos.x += (speed * (clock.getElapsedTime().asMicroseconds() / 100));
-    sprite.setPosition(pos);
-}
-
 void mc_c::apply_gravity(sf::Clock clock)
 {
     // pos.y -= (gravity * clock.getElapsedTime().asMilliseconds());
-    pos.y -= (gravity);
-    sprite.setPosition(pos);
+    if (pos.y < 700) {
+        pos.y -= (gravity);
+        sprite.setPosition(pos);
+    }
 }
 
-void mc_c::jump_effect(void)
+void mc_c::jump_effect(sf::Clock clock)
 {
-    pos.x += 0.7;
+    // pos.x += 0.7;
     if (is_jump_up) {
         if (gravity > _MAX_HEIGTH_JUMP_)
-            pos.y--, gravity--;
+            (pos.y -= 3 * (clock.getElapsedTime().asMicroseconds() / 100)), gravity--;
         else
             is_jump_up = false;
     } else {
         if (gravity < -1)
-            pos.y++, gravity++;
+            (pos.y += 3 * (clock.getElapsedTime().asMicroseconds() / 100)), gravity++;
         else
             is_jumping = false;
     }
@@ -63,9 +57,8 @@ void mc_c::jump_effect(void)
 
 void mc_c::display_mc(sf::RenderWindow &window, sf::Clock clock)
 {
-    move_mc(clock);
     if (is_jumping)
-        jump_effect();
+        jump_effect(clock);
     else
         apply_gravity(clock);
     window.draw(sprite);
@@ -77,7 +70,6 @@ void mc_c::event_mc_c(sf::Event event)
         if (!is_jumping && event.key.code == sf::Keyboard::Space) {
             is_jumping = true;
             is_jump_up = true;
-            printf("ABCD\n");
         }
     }
 }

@@ -17,6 +17,7 @@
     #include <list>
 
     #include "the_runner/mc.hpp"
+    #include "map/map.hpp"
 
     enum SCENE {
         MENU,
@@ -36,6 +37,7 @@
             sf::Clock clock;
             // Other class
             mc_c *mc;
+            map_c *map;
 
         private:
             sf::VideoMode mode;

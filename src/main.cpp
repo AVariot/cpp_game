@@ -15,6 +15,7 @@ void all_c::init_all_c_class(void)
     clock.restart();
     // Init other class
     mc = create_mc_c_class();
+    map = create_map_c_class();
 }
 
 // Create class
@@ -39,6 +40,7 @@ int all_c::loop_game(void)
             mc->event_mc_c(event);
         }
         window.clear(sf::Color::Black);
+        map->display_map(window);
         mc->display_mc(window, clock);
         window.display();
         clock.restart();
