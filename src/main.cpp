@@ -40,7 +40,7 @@ int all_c::loop_game(void)
             mc->event_mc_c(event);
         }
         window.clear(sf::Color::Black);
-        map->display_map(window);
+        map->display_map(window, clock);
         mc->display_mc(window, clock, map->floor);
         window.display();
         clock.restart();
@@ -52,5 +52,6 @@ int main(void)
 {
     all_c *all = create_all_c_class();
     all->loop_game();
+    all->map->get_file_info("assets/map/map_txt/first.txt");
     return 0;
 }
