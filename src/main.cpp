@@ -30,6 +30,8 @@ int all_c::loop_game(void)
 {
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
+            if (event.key.code == sf::Keyboard::Escape)
+                window.close();
             if (event.type == sf::Event::Closed) {
                 window.close();
                 return 0;

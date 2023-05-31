@@ -17,8 +17,9 @@ void menu_c::init_menu(void)
         font.loadFromFile("src/menu/PUSAB___.otf");
         title.setFont(font);
         title.setString("Geometry doush");
-        title.setCharacterSize(80);
-        title.setPosition(sf::Vector2f{575, 200});
+        title.setCharacterSize(100);
+        title.setFillColor(sf::Color::Yellow);
+        title.setPosition(sf::Vector2f{500, 200});
 }
 
 menu_c *create_menu(void)
