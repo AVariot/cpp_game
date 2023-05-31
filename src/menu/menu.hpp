@@ -23,14 +23,16 @@ class menu_c {
         void init_menu();
         void display_menu(sf::RenderWindow &window);
         void display_button(sf::RenderWindow &window);
-        void button_event(sf::Event event, sf::RenderWindow &window);
         std::list<button_c> button;
+        sf::Sprite settings_spr;
 
     private:
         sf::Texture play_txt;
         sf::Sprite play_spr;
         sf::Sprite background_spr;
         sf::Texture background_txt;
+        sf::FloatRect settings_hitbox;
+        sf::Texture settings_txt;
         sf::Text title;
         sf::Font font;
 };

@@ -16,6 +16,7 @@
     #include <iterator>
     #include <list>
     #include "menu/menu.hpp"
+    #include "settings/settings.hpp"
 
     enum SCENE {
         MENU,

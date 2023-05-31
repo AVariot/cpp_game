@@ -30,6 +30,16 @@ int all_c::loop_game(void)
 {
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
+            if (event.type == sf::Event::MouseButtonPressed){
+                if (event.mouseButton.button == sf::Mouse::Left){
+                    sf::Vector2i mousPos = sf::Mouse::getPosition(window);
+                    sf::Vector2f worldPos = window.mapPixelToCoords(mousPos);
+                    if (menu->settings_spr.getGlobalBounds().contains(worldPos)){
+                        scene = SETTINGS;
+                    }
+                }
+            }
+
             if (event.key.code == sf::Keyboard::Escape)
                 window.close();
             if (event.type == sf::Event::Closed) {
@@ -39,7 +49,6 @@ int all_c::loop_game(void)
         }
         window.clear(sf::Color::Black);
         menu->display_menu(window);
-        menu->display_button(window);
         window.display();
     }
     return 0;
