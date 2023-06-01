@@ -13,6 +13,8 @@
     #include <cmath>
     #include <dirent.h>
     #include <string>
+    #include <fstream>
+    #include <iostream>
     #include <iterator>
     #include <list>
     #include "menu/menu.hpp"
@@ -34,6 +36,7 @@
             sf::RenderWindow window;
             sf::Event event;
             menu_c *menu;
+            settings_c *settings;
 
         private:
             sf::VideoMode mode;
