@@ -41,6 +41,7 @@ int all_c::loop_game(void)
         }
         window.clear(sf::Color::Black);
         map->display_map(window, clock);
+        map->print_obstacle(window);
         mc->display_mc(window, clock, map->floor);
         window.display();
         clock.restart();
@@ -51,7 +52,8 @@ int all_c::loop_game(void)
 int main(void)
 {
     all_c *all = create_all_c_class();
+    all->map->act_map = all->map->get_file_info("assets/map/map_txt/first.txt");
+    all->map->init_obstacle();
     all->loop_game();
-    all->map->get_file_info("assets/map/map_txt/first.txt");
     return 0;
 }

@@ -25,11 +25,16 @@
             void init_map_c_class(void);
             void display_map(sf::RenderWindow &window, sf::Clock clock);
             std::string get_file_info(std::string file);
+            void init_obstacle(void);
+            obstacle_c *init_obs_instance(sf::Vector2f pos);
+            void print_obstacle(sf::RenderWindow &window);
+            void move_obstacle(void);
             // Variables
             sf::Sprite sprite;
             sf::Vector2f pos;
             sf::FloatRect floor;
-            std::list<obstacle_c> obs;
+            std::list<obstacle_c> *obs;
+            std::string act_map;
 
         private:
             sf::Texture texture;
