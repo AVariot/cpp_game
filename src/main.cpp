@@ -86,7 +86,6 @@ int all_c::loop_game(void)
                     settings->volumeHandler.setPosition(newPosition, settings->volumeHandler.getPosition().y);
                 }
             }
-
             if (event.key.code == sf::Keyboard::Escape)
                 window.close();
             if (event.type == sf::Event::Closed) {
