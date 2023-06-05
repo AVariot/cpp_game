@@ -19,11 +19,13 @@
     #include <list>
     #include "menu/menu.hpp"
     #include "settings/settings.hpp"
+    #include "level_selector/level_selector.hpp"
 
     enum SCENE {
         MENU,
         GAME,
-        SETTINGS
+        SETTINGS,
+        LEVEL
     };
 
     class all_c {
@@ -37,6 +39,7 @@
             sf::Event event;
             menu_c *menu;
             settings_c *settings;
+            level_c *level;
 
         private:
             sf::VideoMode mode;

@@ -25,10 +25,10 @@ class menu_c {
         void display_button(sf::RenderWindow &window);
         std::list<button_c> button;
         sf::Sprite settings_spr;
+        sf::Sprite play_spr;
 
     private:
         sf::Texture play_txt;
-        sf::Sprite play_spr;
         sf::Sprite background_spr;
         sf::Texture background_txt;
         sf::FloatRect settings_hitbox;
