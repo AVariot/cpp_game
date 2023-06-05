@@ -29,6 +29,7 @@
             obstacle_c *init_obs_instance(sf::Vector2f pos);
             void print_obstacle(sf::RenderWindow &window);
             void move_obstacle(void);
+            void check_collision(sf::Sprite spr);
             // Variables
             sf::Sprite sprite;
             sf::Vector2f pos;

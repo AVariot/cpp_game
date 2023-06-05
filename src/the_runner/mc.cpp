@@ -20,6 +20,9 @@ void mc_c::init_mc_c_class(void)
     sprite.setTexture(texture);
     sprite.setPosition(pos);
     sprite.setScale({0.1, 0.1});
+
+    view.setSize((sf::Vector2f){1920, 1080});
+    view.setCenter((sf::Vector2f){1920 / 2, 1080 / 2});
 }
 
 mc_c *create_mc_c_class(void)
@@ -37,14 +40,15 @@ void mc_c::apply_gravity(sf::Clock clock, sf::FloatRect floor)
 
 void mc_c::jump_effect(sf::Clock clock, sf::FloatRect floor)
 {
+    pos.x += 0.5;
     if (is_jump_up) {
         if (gravity > _MAX_HEIGTH_JUMP_)
-            (pos.y -= 1 * (clock.getElapsedTime().asMicroseconds() / 100)), gravity--;
+            (pos.y -= 2 * (clock.getElapsedTime().asMicroseconds() / 100)), gravity--;
         else
             is_jump_up = false;
     } else {
         if (!sprite.getGlobalBounds().intersects(floor))
-            (pos.y += 1 * (clock.getElapsedTime().asMicroseconds() / 100));
+            (pos.y += 2 * (clock.getElapsedTime().asMicroseconds() / 100));
         else {
             is_jumping = false;
             gravity = -1;
@@ -55,6 +59,9 @@ void mc_c::jump_effect(sf::Clock clock, sf::FloatRect floor)
 
 void mc_c::display_mc(sf::RenderWindow &window, sf::Clock clock, sf::FloatRect floor)
 {
+    pos.x++;
+    view.setCenter((sf::Vector2f){pos.x, view.getCenter().y});
+    sprite.setPosition(pos);
     if (is_jumping)
         jump_effect(clock, floor);
     else

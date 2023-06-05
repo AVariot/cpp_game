@@ -7,7 +7,7 @@
 
     #include <SFML/Graphics.hpp>
 
-    #define _MAX_HEIGTH_JUMP_   -100
+    #define _MAX_HEIGTH_JUMP_   -200
 
     class mc_c {
         public:
@@ -21,9 +21,10 @@
             int gravity;
             bool is_jumping;
             bool is_jump_up;
+            sf::Sprite sprite;
+            sf::View view;
 
         private:
-            sf::Sprite sprite;
             sf::Texture texture;
             sf::Vector2f pos;
             float speed;

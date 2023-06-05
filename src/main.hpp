@@ -15,6 +15,9 @@
     #include <string>
     #include <iterator>
     #include <list>
+    #include <future>
+    #include <iostream>
+    #include <thread>
 
     #include "the_runner/mc.hpp"
     #include "map/map.hpp"

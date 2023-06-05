@@ -29,8 +29,11 @@ all_c *create_all_c_class(void)
 
 // Loop Game
 
-int all_c::loop_game(void)
-{
+int all_c::loop_game(void) {
+    // std::thread collisionThread([&]() {
+    //     map->check_collision(std::ref(mc->sprite));
+    // });
+
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -43,9 +46,14 @@ int all_c::loop_game(void)
         map->display_map(window, clock);
         map->print_obstacle(window);
         mc->display_mc(window, clock, map->floor);
+        map->check_collision(std::ref(mc->sprite));
+        window.setView(mc->view);
         window.display();
         clock.restart();
     }
+
+    // collisionThread.join(); // Attendre la fin de l'exécution du thread
+
     return 0;
 }
 
