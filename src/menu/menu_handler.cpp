@@ -13,6 +13,10 @@ void menu_c::init_menu(void)
     play_spr.setTexture(play_txt);
     play_spr.setScale(sf::Vector2f{0.5, 0.5});
     play_spr.setPosition(sf::Vector2f{750, 500});
+    quit_txt.loadFromFile("src/menu/close.png");
+    quit_spr.setTexture(quit_txt);
+    quit_spr.setPosition(sf::Vector2f{75, 50});
+    quit_spr.setScale(sf::Vector2f{0.6, 0.6});
     settings_txt.loadFromFile("src/menu/settings.png");
     settings_spr.setTexture(settings_txt);
     settings_spr.setScale(sf::Vector2f{1, 1});
@@ -38,6 +42,7 @@ void menu_c::display_menu(sf::RenderWindow &window)
     window.draw(play_spr);
     window.draw(settings_spr);
     window.draw(title);
+    window.draw(quit_spr);
 }
 
 void button_c::init_button(sf::Vector2f size, sf::Vector2f pos, sf::String str, int idd)

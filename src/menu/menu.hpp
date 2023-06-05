@@ -26,9 +26,11 @@ class menu_c {
         std::list<button_c> button;
         sf::Sprite settings_spr;
         sf::Sprite play_spr;
+        sf::Sprite quit_spr;
 
     private:
         sf::Texture play_txt;
+        sf::Texture quit_txt;
         sf::Sprite background_spr;
         sf::Texture background_txt;
         sf::FloatRect settings_hitbox;

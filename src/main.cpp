@@ -53,8 +53,17 @@ int all_c::loop_game(void)
                     if (menu->settings_spr.getGlobalBounds().contains(worldPos)){
                         scene = SETTINGS;
                     }
-                    if (settings->quit_spr.getGlobalBounds().contains(worldPos)){
-                        scene = MENU;
+                    if (scene == SETTINGS){
+                        if (settings->quit_spr.getGlobalBounds().contains(worldPos))
+                            scene = MENU;
+                    }
+                    if (scene == LEVEL){
+                        if (level->quit_spr.getGlobalBounds().contains(worldPos))
+                            scene = MENU;
+                    }
+                    if (scene == MENU){
+                        if (menu->quit_spr.getGlobalBounds().contains(worldPos))
+                            window.close();
                     }
                     if (menu->play_spr.getGlobalBounds().contains(worldPos)){
                         scene = LEVEL;
@@ -90,10 +99,6 @@ int all_c::loop_game(void)
                         settings->volumeHandler.setPosition(newPosition, settings->volumeHandler.getPosition().y);
                     }
                 }
-            }
-            if (scene == MENU){
-                if (event.key.code == sf::Keyboard::Escape)
-                    window.close();
             }
             if (event.type == sf::Event::Closed) {
                 window.close();
