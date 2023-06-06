@@ -24,10 +24,10 @@ void all_c::init_all_c_class(void)
 
 // Create class
 
-all_c *create_all_c_class(void)
+all_c create_all_c_class(void)
 {
-    all_c *new_all_c = new all_c();
-    new_all_c->init_all_c_class();
+    all_c new_all_c = all_c();
+    new_all_c.init_all_c_class();
     return new_all_c;
 }
 
@@ -40,78 +40,78 @@ int all_c::loop_game(void)
         std::cout << "Erreur lors de l'ouverture du fichier." << std::endl;
         return -1;
     }
-    file >> settings->volumeLevel;
+    file >> settings.volumeLevel;
     file.close();
     sf::SoundBuffer music_buffer;
     music_buffer.loadFromFile("ressources/ICE_geo_.save.wav");
     sf::Sound music;
     music.setBuffer(music_buffer);
     music.setLoop(true);
-    music.setVolume(settings->volumeLevel);
+    music.setVolume(settings.volumeLevel);
     music.play();
+    mc = create_mc_c_class();
+    map = create_map_c_class();
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::MouseButtonPressed){
                 if (event.mouseButton.button == sf::Mouse::Left){
                     sf::Vector2i mousPos = sf::Mouse::getPosition(window);
                     sf::Vector2f worldPos = window.mapPixelToCoords(mousPos);
-                    if (menu->settings_spr.getGlobalBounds().contains(worldPos)){
+                    if (menu.settings_spr.getGlobalBounds().contains(worldPos)){
                         scene = SETTINGS;
                     }
                     if (scene == SETTINGS){
-                        if (settings->quit_spr.getGlobalBounds().contains(worldPos))
+                        if (settings.quit_spr.getGlobalBounds().contains(worldPos))
                             scene = MENU;
                     }
                     if (scene == LEVEL){
-                        if (level->quit_spr.getGlobalBounds().contains(worldPos))
+                        if (level.quit_spr.getGlobalBounds().contains(worldPos))
                             scene = MENU;
-                        if (level->play_spr.getGlobalBounds().contains(worldPos)){
+                        if (level.play_spr.getGlobalBounds().contains(worldPos)){
                             window.clear(sf::Color::Black);
-                            mc = create_mc_c_class();
-                            map = create_map_c_class();
                             is_playing = 0;
                             music_buffer.loadFromFile("ressources/deep_124_.save.wav");
                             music.setBuffer(music_buffer);
-                            music.setVolume(settings->volumeLevel);
+                            music.setVolume(settings.volumeLevel);
                             music.play();
                         }
                     }
                     if (scene == MENU){
-                        if (menu->quit_spr.getGlobalBounds().contains(worldPos))
+                        if (menu.quit_spr.getGlobalBounds().contains(worldPos))
                             window.close();
                     }
-                    if (menu->play_spr.getGlobalBounds().contains(worldPos)){
+                    if (menu.play_spr.getGlobalBounds().contains(worldPos)){
                         scene = LEVEL;
                     }
                 }
             }
             if (scene == SETTINGS){
                 if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
-                    float barWidth = settings->volumeBar.getSize().x;
+                    float barWidth = settings.volumeBar.getSize().x;
                     float mouseX = event.mouseButton.x - 500;
-                    settings->volumeLevel = (mouseX / barWidth) * 100;
-                    music.setVolume(settings->volumeLevel);
+                    settings.volumeLevel = (mouseX / barWidth) * 100;
+                    music.setVolume(settings.volumeLevel);
                 }
                 if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-                    if (settings->volumeHandler.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-                        settings->isDragging = true;
+                    if (settings.volumeHandler.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+                        settings.isDragging = true;
                     }
                 }
                 if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
-                    settings->isDragging = false;
+                    settings.isDragging = false;
                 }
                 if (event.type == sf::Event::MouseMoved) {
-                    if (settings->isDragging) {
+                    if (settings.isDragging) {
                         float mouseX = event.mouseMove.x;
-                        float buttonWidth = settings->volumeHandler.getSize().x;
+                        float buttonWidth = settings.volumeHandler.getSize().x;
                         float newPosition = mouseX - buttonWidth / 2;
-                        if (newPosition < settings->buttonLeftLimit) {
-                            newPosition = settings->buttonLeftLimit;
+                        if (newPosition < settings.buttonLeftLimit) {
+                            newPosition = settings.buttonLeftLimit;
                         }
-                        if (newPosition > settings->buttonRightLimit - buttonWidth) {
-                            newPosition = settings->buttonRightLimit - buttonWidth;
+                        if (newPosition > settings.buttonRightLimit - buttonWidth) {
+                            newPosition = settings.buttonRightLimit - buttonWidth;
                         }
-                        settings->volumeHandler.setPosition(newPosition, settings->volumeHandler.getPosition().y);
+                        settings.volumeHandler.setPosition(newPosition, settings.volumeHandler.getPosition().y);
                     }
                 }
             }
@@ -119,21 +119,21 @@ int all_c::loop_game(void)
                 window.close();
                 return 0;
             }
-            mc->event_mc_c(event);
+            mc.event_mc_c(event);
         }
         std::ofstream file("ressources/volume.txt");
         if (file.is_open()) {
-            file << settings->volumeLevel;
+            file << settings.volumeLevel;
             file.close();
         }
         window.clear(sf::Color::Black);
-        window.draw(settings->volumeHandler);
+        window.draw(settings.volumeHandler);
         if (scene == SETTINGS)
-            settings->display_settings(window);
+            settings.display_settings(window);
         if (scene == MENU)
-            menu->display_menu(window);
+            menu.display_menu(window);
         if (scene == LEVEL)
-            level->display_level(window);
+            level.display_level(window);
         if (is_playing == 0)
             game(map, mc, clock, window);
         window.display();
@@ -141,24 +141,21 @@ int all_c::loop_game(void)
     }
     music.stop();
 
-    // collisionThread.join(); // Attendre la fin de l'exécution du thread
     return 0;
 }
 
-void game(map_c *map, mc_c *mc, sf::Clock clock, sf::RenderWindow &window)
+void all_c::game(map_c map, mc_c *mc, sf::Clock clock, sf::RenderWindow &window)
 {
-    map->display_map(window, clock);
-    map->print_obstacle(window);
-    mc->display_mc(window, clock, map->floor);
-    map->check_collision(std::ref(mc->sprite));
-    window.setView(mc->view);
+    // map.setposX(map.getPosX() -1);
+    map.display_map(window, clock);
+    map.print_obstacle(window);
+    mc.display_mc(window, clock, map.floor);
+    map.check_collision(std::ref(mc.sprite));
 }
 
 int main(void)
 {
-    all_c *all = create_all_c_class();
-    all->map->act_map = all->map->get_file_info("assets/map/map_txt/first.txt");
-    all->map->init_obstacle();
-    all->loop_game();
+    all_c all = create_all_c_class();
+    all.loop_game();
     return 0;
 }

@@ -40,21 +40,21 @@
             // Fonction all_c
             int loop_game(void);
             void init_all_c_class(void);
+            void game(map_c map, mc_c mc, sf::Clock clock, sf::RenderWindow &window);
             // Variables
             sf::RenderWindow window;
             sf::Event event;
-            menu_c *menu;
-            settings_c *settings;
-            level_c *level;
+            menu_c menu;
+            settings_c settings;
+            level_c level;
             sf::Clock clock;
             // Other class
-            mc_c *mc;
-            map_c *map;
+            mc_c mc;
+            map_c map;
             int is_playing;
 
         private:
             sf::VideoMode mode;
     };
 
-void game(map_c *map, mc_c *mc, sf::Clock clock, sf::RenderWindow &window);
 #endif // !main_hpp

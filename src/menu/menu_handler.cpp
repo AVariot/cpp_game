@@ -29,10 +29,10 @@ void menu_c::init_menu(void)
     title.setPosition(sf::Vector2f{500, 200});
 }
 
-menu_c *create_menu(void)
+menu_c create_menu(void)
 {
-    menu_c *n_menu = new menu_c();
-    n_menu->init_menu();
+    menu_c n_menu = menu_c();
+    n_menu.init_menu();
     return n_menu;
 }
 
