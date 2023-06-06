@@ -19,6 +19,7 @@ void all_c::init_all_c_class(void)
     // Init other class
     mc = create_mc_c_class();
     map = create_map_c_class();
+    is_playing = 1;
 }
 
 // Create class
@@ -48,11 +49,6 @@ int all_c::loop_game(void)
     music.setLoop(true);
     music.setVolume(settings->volumeLevel);
     music.play();
-int all_c::loop_game(void) {
-    // std::thread collisionThread([&]() {
-    //     map->check_collision(std::ref(mc->sprite));
-    // });
-
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::MouseButtonPressed){
@@ -69,6 +65,16 @@ int all_c::loop_game(void) {
                     if (scene == LEVEL){
                         if (level->quit_spr.getGlobalBounds().contains(worldPos))
                             scene = MENU;
+                        if (level->play_spr.getGlobalBounds().contains(worldPos)){
+                            window.clear(sf::Color::Black);
+                            mc = create_mc_c_class();
+                            map = create_map_c_class();
+                            is_playing = 0;
+                            music_buffer.loadFromFile("ressources/deep_124_.save.wav");
+                            music.setBuffer(music_buffer);
+                            music.setVolume(settings->volumeLevel);
+                            music.play();
+                        }
                     }
                     if (scene == MENU){
                         if (menu->quit_spr.getGlobalBounds().contains(worldPos))
@@ -128,11 +134,8 @@ int all_c::loop_game(void) {
             menu->display_menu(window);
         if (scene == LEVEL)
             level->display_level(window);
-        map->display_map(window, clock);
-        map->print_obstacle(window);
-        mc->display_mc(window, clock, map->floor);
-        map->check_collision(std::ref(mc->sprite));
-        window.setView(mc->view);
+        if (is_playing == 0)
+            game(map, mc, clock, window);
         window.display();
         clock.restart();
     }
@@ -140,6 +143,15 @@ int all_c::loop_game(void) {
 
     // collisionThread.join(); // Attendre la fin de l'exécution du thread
     return 0;
+}
+
+void game(map_c *map, mc_c *mc, sf::Clock clock, sf::RenderWindow &window)
+{
+    map->display_map(window, clock);
+    map->print_obstacle(window);
+    mc->display_mc(window, clock, map->floor);
+    map->check_collision(std::ref(mc->sprite));
+    window.setView(mc->view);
 }
 
 int main(void)

@@ -10,11 +10,11 @@ class level_c {
         void init_level();
         void display_level(sf::RenderWindow &window);
         sf::Sprite quit_spr;
+        sf::Sprite play_spr;
     private:
         sf::Texture background_txt;
         sf::Sprite background_spr;
         sf::Texture play_txt;
-        sf::Sprite play_spr;
         sf::Texture quit_txt;
         sf::RectangleShape rect;
         sf::Text text;

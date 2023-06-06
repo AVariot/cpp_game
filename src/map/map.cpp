@@ -6,7 +6,7 @@
 
 void map_c::init_map_c_class(void)
 {
-    if (!texture.loadFromFile("assets/map/back.png")) {
+    if (!texture.loadFromFile("assets/map/Background.png")) {
         printf("Err: impossible to load the back.png from assets/map\n");
         exit(84);
     }
@@ -28,10 +28,10 @@ map_c *create_map_c_class(void)
 
 void map_c::display_map(sf::RenderWindow &window, sf::Clock clock)
 {
-    // pos.x -= 2;
-    // if (pos.x <= -3840)
+    pos.x += 0.95;
+    // if (pos.x <= -1920)
     //     pos.x = 0;
-    // sprite.setPosition(pos);
+    sprite.setPosition(pos);
     window.draw(sprite);
 }
 

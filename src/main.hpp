@@ -16,6 +16,7 @@
     #include <fstream>
     #include <iostream>
     #include <iterator>
+    #include <stdbool.h>
     #include <list>
     #include "menu/menu.hpp"
     #include "settings/settings.hpp"
@@ -49,9 +50,11 @@
             // Other class
             mc_c *mc;
             map_c *map;
+            int is_playing;
 
         private:
             sf::VideoMode mode;
     };
 
+void game(map_c *map, mc_c *mc, sf::Clock clock, sf::RenderWindow &window);
 #endif // !main_hpp
