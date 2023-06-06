@@ -13,19 +13,24 @@
     #include <cmath>
     #include <dirent.h>
     #include <string>
+    #include <fstream>
+    #include <iostream>
     #include <iterator>
     #include <list>
+    #include "menu/menu.hpp"
+    #include "settings/settings.hpp"
+    #include "level_selector/level_selector.hpp"
     #include <future>
     #include <iostream>
     #include <thread>
-
     #include "the_runner/mc.hpp"
     #include "map/map.hpp"
 
     enum SCENE {
         MENU,
         GAME,
-        SETTINGS
+        SETTINGS,
+        LEVEL
     };
 
     class all_c {
@@ -37,6 +42,9 @@
             // Variables
             sf::RenderWindow window;
             sf::Event event;
+            menu_c *menu;
+            settings_c *settings;
+            level_c *level;
             sf::Clock clock;
             // Other class
             mc_c *mc;
