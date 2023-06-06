@@ -15,6 +15,10 @@ void all_c::init_all_c_class(void)
     menu = create_menu();
     settings = create_settings();
     level = create_levels();
+    clock.restart();
+    // Init other class
+    mc = create_mc_c_class();
+    map = create_map_c_class();
 }
 
 // Create class
@@ -44,6 +48,11 @@ int all_c::loop_game(void)
     music.setLoop(true);
     music.setVolume(settings->volumeLevel);
     music.play();
+int all_c::loop_game(void) {
+    // std::thread collisionThread([&]() {
+    //     map->check_collision(std::ref(mc->sprite));
+    // });
+
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::MouseButtonPressed){
@@ -104,6 +113,7 @@ int all_c::loop_game(void)
                 window.close();
                 return 0;
             }
+            mc->event_mc_c(event);
         }
         std::ofstream file("ressources/volume.txt");
         if (file.is_open()) {
@@ -118,15 +128,25 @@ int all_c::loop_game(void)
             menu->display_menu(window);
         if (scene == LEVEL)
             level->display_level(window);
+        map->display_map(window, clock);
+        map->print_obstacle(window);
+        mc->display_mc(window, clock, map->floor);
+        map->check_collision(std::ref(mc->sprite));
+        window.setView(mc->view);
         window.display();
+        clock.restart();
     }
     music.stop();
+
+    // collisionThread.join(); // Attendre la fin de l'exécution du thread
     return 0;
 }
 
 int main(void)
 {
     all_c *all = create_all_c_class();
+    all->map->act_map = all->map->get_file_info("assets/map/map_txt/first.txt");
+    all->map->init_obstacle();
     all->loop_game();
     return 0;
 }
