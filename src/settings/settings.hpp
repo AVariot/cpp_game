@@ -24,4 +24,4 @@ class settings_c {
         sf::Texture quit_txt;
 };
 
-settings_c create_settings(void);
+settings_c *create_settings(void);

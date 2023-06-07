@@ -29,10 +29,10 @@ void menu_c::init_menu(void)
     title.setPosition(sf::Vector2f{500, 200});
 }
 
-menu_c create_menu(void)
+menu_c *create_menu(void)
 {
-    menu_c n_menu = menu_c();
-    n_menu.init_menu();
+    menu_c *n_menu = new menu_c();
+    n_menu->init_menu();
     return n_menu;
 }
 
@@ -61,9 +61,9 @@ void button_c::init_button(sf::Vector2f size, sf::Vector2f pos, sf::String str, 
     id = idd;
 }
 
-button_c create_button(void)
+button_c *create_button(void)
 {
-    button_c n_button = button_c();
+    button_c *n_button = new button_c();
     return n_button;
 }
 

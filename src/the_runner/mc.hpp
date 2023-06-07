@@ -7,7 +7,7 @@
 
     #include <SFML/Graphics.hpp>
 
-    #define _MAX_HEIGTH_JUMP_   -100
+    #define _MAX_HEIGTH_JUMP_   -200
 
     class mc_c {
         public:
@@ -32,6 +32,6 @@
 
     // Prototypes
 
-    mc_c create_mc_c_class(void);
+    mc_c *create_mc_c_class(void);
 
 #endif // !mc_hpp

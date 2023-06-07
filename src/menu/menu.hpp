@@ -39,5 +39,5 @@ class menu_c {
         sf::Font font;
 };
 
-menu_c create_menu(void);
-button_c create_button(void);
+menu_c *create_menu(void);
+button_c *create_button(void);

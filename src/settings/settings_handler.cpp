@@ -25,10 +25,10 @@ void settings_c::init_settings(void)
     buttonRightLimit = 950.0f;
 }
 
-settings_c create_settings(void)
+settings_c *create_settings(void)
 {
-    settings_c n_settings = settings_c();
-    n_settings.init_settings();
+    settings_c *n_settings = new settings_c();
+    n_settings->init_settings();
     return n_settings;
 }
 
