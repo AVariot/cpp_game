@@ -38,7 +38,6 @@
         public:
             enum SCENE scene;
             // Fonction all_c
-            int loop_game(void);
             void init_all_c_class(void);
             void game(map_c map, mc_c mc, sf::Clock clock, sf::RenderWindow &window);
             // Variables
@@ -56,5 +55,7 @@
         private:
             sf::VideoMode mode;
     };
+
+    // all_c *create_all_c_class(void);
 
 #endif // !main_hpp
