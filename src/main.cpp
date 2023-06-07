@@ -144,7 +144,7 @@ int all_c::loop_game(void)
     return 0;
 }
 
-void all_c::game(map_c map, mc_c *mc, sf::Clock clock, sf::RenderWindow &window)
+void all_c::game(map_c map, mc_c mc, sf::Clock clock, sf::RenderWindow &window)
 {
     // map.setposX(map.getPosX() -1);
     map.display_map(window, clock);

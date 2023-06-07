@@ -29,10 +29,10 @@ void level_c::init_level(void)
     text.setPosition(sf::Vector2f{600, 200});
 }
 
-level_c *create_levels(void)
+level_c create_levels(void)
 {
-        level_c *n_level = new level_c();
-        n_level->init_level();
+        level_c n_level = level_c();
+        n_level.init_level();
         return n_level;
 }
 

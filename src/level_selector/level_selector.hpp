@@ -21,4 +21,4 @@ class level_c {
         sf::Font font;
 };
 
-level_c *create_levels(void);
+level_c create_levels(void);

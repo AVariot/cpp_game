@@ -61,9 +61,9 @@ void button_c::init_button(sf::Vector2f size, sf::Vector2f pos, sf::String str, 
     id = idd;
 }
 
-button_c *create_button(void)
+button_c create_button(void)
 {
-    button_c *n_button = new button_c();
+    button_c n_button = button_c();
     return n_button;
 }
 

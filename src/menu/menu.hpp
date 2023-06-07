@@ -40,4 +40,4 @@ class menu_c {
 };
 
 menu_c create_menu(void);
-button_c *create_button(void);
+button_c create_button(void);
